@@ -1,27 +1,44 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdd6tnvri16ta"]
+[gd_scene load_steps=14 format=3 uid="uid://cdd6tnvri16ta"]
 
 [ext_resource type="Texture2D" uid="uid://d1fcdr1hk4m3m" path="res://sprites/background.png" id="1_n6kgs"]
+[ext_resource type="FontFile" uid="uid://ci8kelx4psd6p" path="res://fonts/PixelifySans-VariableFont_wght.ttf" id="1_p8ew8"]
 [ext_resource type="Script" path="res://Timer.gd" id="1_r5vfo"]
 [ext_resource type="Texture2D" uid="uid://bq2issv6q78h3" path="res://sprites/Tileset.png" id="2_cgqne"]
 [ext_resource type="PackedScene" uid="uid://dp1sgbeywsxsi" path="res://scenes/player.tscn" id="3_bwrsv"]
+[ext_resource type="PackedScene" uid="uid://c71i43tx4e2s5" path="res://checkpoint.tscn" id="5_qkdsd"]
 [ext_resource type="PackedScene" uid="uid://b40qcq5uv0kwm" path="res://steam_eruptor.tscn" id="5_t36ah"]
-[ext_resource type="Script" path="res://Leaderboard-fetcher.gd" id="6_ex8gf"]
+[ext_resource type="PackedScene" uid="uid://bnrday3kdke0" path="res://start_position.tscn" id="8_wg3pl"]
 
 [sub_resource type="GDScript" id="GDScript_md5l2"]
 script/source = "extends Node
 
 @onready var timer_label = $CanvasLayer/Timer
 @onready var timer = $Timer
+@onready var player = $Player
+@onready var start_position = $StartPosition
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	player.position = start_position.position
+	player.set_checkpoint(start_position)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_uovmn"]
+font = ExtResource("1_p8ew8")
+font_size = 18
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3dm7a"]
+font = ExtResource("1_p8ew8")
+font_size = 18
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_042gh"]
 texture = ExtResource("2_cgqne")
@@ -91,6 +108,7 @@ offset_right = 48.0
 offset_bottom = 23.0
 scale = Vector2(3, 3)
 text = "Speed"
+label_settings = SubResource("LabelSettings_uovmn")
 
 [node name="Timer" type="Label" parent="CanvasLayer"]
 texture_filter = 1
@@ -103,6 +121,7 @@ offset_bottom = 23.0
 grow_horizontal = 0
 scale = Vector2(3, 3)
 text = "00:00:00"
+label_settings = SubResource("LabelSettings_3dm7a")
 script = ExtResource("1_r5vfo")
 metadata/_edit_use_anchors_ = true
 
@@ -131,8 +150,13 @@ layer_0/tile_data = PackedInt32Array(1310720, 131072, 1, 1245184, 131072, 1, 117
 position = Vector2(842, 400)
 scale = Vector2(4, 4)
 
+[node name="Checkpoint" parent="." instance=ExtResource("5_qkdsd")]
+position = Vector2(1069, 161)
+
 [node name="Player" parent="." instance=ExtResource("3_bwrsv")]
 position = Vector2(282, 410)
 
 [node name="Leaderboard-fetcher" type="Node" parent="."]
-script = ExtResource("6_ex8gf")
+
+[node name="StartPosition" parent="." instance=ExtResource("8_wg3pl")]
+position = Vector2(281, 416)

@@ -5,11 +5,13 @@ var speed = 300.0
 const ORIGINAL_SPEED = 300.0
 const MAX_SPEED = 1600.0
 const JUMP_VELOCITY = -900.0
+var last_checkpoint = null
 @onready var sprite_2d = $Sprite2D
 @onready var speed_label = $"../CanvasLayer/SpeedLabel"
 @onready var coyote_timer = $CoyoteTimer
 @onready var character_body_2d = $"."
 @onready var audio_stream_player = $AudioStreamPlayer
+@onready var ui = $"../UI"
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -18,9 +20,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func update_speedometer():
 	speed_label.text = "Speed: %s"% abs(velocity.x)
 	if(speed >= 1200):
-		speed_label.set("theme_override_colors/font_color", Color(1.0,0.0,0.0,1.0))
+		speed_label.set_modulate(Color(1.0,0.0,0.0,1.0))
 	else:
-		speed_label.set("theme_override_colors/font_color", Color(255,255,255))
+		speed_label.set_modulate(Color(255,255,255))
 
 func update_run_animations():
 	if(velocity.x > 1  || velocity.x < -1):
@@ -82,6 +84,18 @@ func add_speed(amount) -> void:
 	if(speed < MAX_SPEED):
 		speed += amount
 
+func _ready():
+	last_checkpoint = null
+
+func reset():
+	if(last_checkpoint != null):
+		position = last_checkpoint.position
+		velocity.x = 0
+		velocity.y = 0
+
+func set_checkpoint(checkpoint) -> void:
+	last_checkpoint = checkpoint
+
 #update function
 func _physics_process(delta):
 	
@@ -102,6 +116,10 @@ func _physics_process(delta):
 
 	# Movement input
 	handle_movement()
+
+	#Manual Reset
+	if(Input.is_action_just_pressed("reset")):
+		reset()
 
 	var was_on_floor = is_on_floor()
 	
