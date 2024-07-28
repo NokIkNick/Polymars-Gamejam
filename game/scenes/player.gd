@@ -9,13 +9,14 @@ const JUMP_VELOCITY = -900.0
 @onready var speed_label = $"../CanvasLayer/SpeedLabel"
 @onready var coyote_timer = $CoyoteTimer
 @onready var character_body_2d = $"."
+@onready var audio_stream_player = $AudioStreamPlayer
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func update_speedometer():
-	speed_label.text = "Speed: %s"% velocity.x
+	speed_label.text = "Speed: %s"% abs(velocity.x)
 	if(speed >= 1200):
 		speed_label.set("theme_override_colors/font_color", Color(1.0,0.0,0.0,1.0))
 	else:
@@ -30,7 +31,7 @@ func update_run_animations():
 		else:
 			sprite_2d.animation = "run"
 	else:
-		if(speed > ORIGINAL_SPEED):
+		if(speed > ORIGINAL_SPEED && speed < 300):
 			speed -=1 
 		
 		speed = 300
@@ -59,6 +60,7 @@ func update_sprite_by_speed():
 func handle_jump():
 	if Input.is_action_just_pressed("jump") and (is_on_floor() || !coyote_timer.is_stopped()):
 		velocity.y = JUMP_VELOCITY
+		audio_stream_player.play()
 
 func handle_movement():
 	var direction = Input.get_axis("left", "right")
@@ -66,14 +68,19 @@ func handle_movement():
 		velocity.x = direction * speed
 		if(speed < MAX_SPEED):
 			speed +=1
+		
+		if(speed < 300):
+			speed = 300
 	else:
 		velocity.x = move_toward(velocity.x, 0, 12)
 		speed -= 10
 
-func _on_Area2D_area_entered(area):
-	print("collision!")
-	if(area.name == "SteamEruptor" && is_on_floor()):
-		velocity.y = JUMP_VELOCITY * 2
+func add_speed(amount) -> void:
+	if((speed + amount) > MAX_SPEED):
+		pass
+	
+	if(speed < MAX_SPEED):
+		speed += amount
 
 #update function
 func _physics_process(delta):
@@ -100,6 +107,7 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
+	
 	##Coyote timer:
 	if was_on_floor && !is_on_floor():
 		coyote_timer.start()
@@ -107,3 +115,5 @@ func _physics_process(delta):
 	
 	var isLeft = velocity.x < 0
 	sprite_2d.flip_h = isLeft
+
+
