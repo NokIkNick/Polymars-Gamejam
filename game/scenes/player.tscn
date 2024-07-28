@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dp1sgbeywsxsi"]
+[gd_scene load_steps=70 format=3 uid="uid://dp1sgbeywsxsi"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_5aj2y"]
 [ext_resource type="Texture2D" uid="uid://cfbw1dyb0dtap" path="res://sprites/player_idle.png" id="1_23tjx"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://be1jmodvxgx2l" path="res://sprites/player_jump_sprite_single.png" id="4_oap7a"]
 [ext_resource type="Texture2D" uid="uid://cuqkec0p368g3" path="res://sprites/player_sprint_sprite_new.png" id="7_rxtuh"]
 [ext_resource type="Texture2D" uid="uid://dk24sm38boos1" path="res://sprites/player_sprint_jump.sprite.png" id="8_mk3hb"]
+[ext_resource type="Script" path="res://scenes/Camera2D.gd" id="9_oveqc"]
+[ext_resource type="AudioStream" uid="uid://bm2veqoo2n1lx" path="res://sounds/jump.wav" id="10_yp1ox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_140hn"]
 atlas = ExtResource("2_q84is")
@@ -98,7 +100,6 @@ atlas = ExtResource("1_23tjx")
 region = Rect2(88, 0, 8, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cav5w"]
-load_path = "res://.godot/imported/player_jump_sprite.png-154def96316b0b4fe4b1fa099f3aadb0.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_20ys2"]
 atlas = SubResource("CompressedTexture2D_cav5w")
@@ -460,13 +461,18 @@ sprite_frames = SubResource("SpriteFrames_i2t3j")
 animation = &"fullsprint_jump"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 18)
-shape = SubResource("RectangleShape2D_yxxnp")
-
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_speed = 10.0
+script = ExtResource("9_oveqc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 18)
+shape = SubResource("RectangleShape2D_yxxnp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_yp1ox")
+volume_db = -10.306
