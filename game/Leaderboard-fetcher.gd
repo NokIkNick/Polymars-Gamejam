@@ -2,11 +2,14 @@ extends Node
 
 # Use this game API key if you want to test it with a functioning leaderboard
 # "987dbd0b9e5eb3749072acc47a210996eea9feb0"
-var game_API_key = "987dbd0b9e5eb3749072acc47a210996eea9feb0"
+var game_API_key = "dev_546f5a836aa244f6bafbf6e128ee34f2"
 var development_mode = true
-var leaderboard_key = "leaderboardKey"
+var leaderboard_key = "overspeed_leaderboard"
 var session_token = ""
 var score = 0
+@onready var label = $"../Panel/ScrollContainer/Label"
+
+var currentLeaderboard
 
 # HTTP Request node can only handle one call per node
 var auth_http = HTTPRequest.new()
@@ -33,8 +36,7 @@ func _process(_delta):
 		_get_player_name()
 	
 	# Get score when pressing spacebar
-	if(Input.is_action_just_pressed("ui_select")):
-		_change_player_name()
+	
 
 
 func _authentication_request():
@@ -79,11 +81,15 @@ func _on_authentication_request_completed(result, response_code, headers, body):
 	
 	# Save the player_identifier to file
 	var file = FileAccess.open("user://LootLocker.data", FileAccess.WRITE)
-	file.store_string(json.get_data().player_identifier)
+	if(json.get("player_identifier")):
+		file.store_string(json.get_data().player_identifier)
+		
 	file.close()
 	
+	if(json.get("session_token")):
+		session_token = json.get_data().session_token
 	# Save session_token to memory
-	session_token = json.get_data().session_token
+	
 	
 	# Print server response
 	print(json.get_data())
@@ -116,19 +122,21 @@ func _on_leaderboard_request_completed(result, response_code, headers, body):
 	
 	# Formatting as a leaderboard
 	var leaderboardFormatted = ""
-	for n in json.get_data().items.size():
-		leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
-		leaderboardFormatted += str(json.get_data().items[n].player.id)+str(" - ")
-		leaderboardFormatted += str(json.get_data().items[n].score)+str("\n")
+	if(json.get("items")):
+		for n in json.get_data().items.size():
+			leaderboardFormatted += str(json.get_data().items[n].rank)+str(". ")
+			leaderboardFormatted += str(json.get_data().items[n].player.id)+str(" - ")
+			leaderboardFormatted += str(json.get_data().items[n].score)+str("\n")
 	# Print the formatted leaderboard to the console
 	print(leaderboardFormatted)
+	
 	
 	# Clear node
 	leaderboard_http.queue_free()
 
 
-func _upload_score(score: int):
-	var data = { "score": str(score) }
+func _upload_score(score: String):
+	var data = { "score": score }
 	var headers = ["Content-Type: application/json", "x-session-token:"+session_token]
 	submit_score_http = HTTPRequest.new()
 	add_child(submit_score_http)
@@ -138,11 +146,11 @@ func _upload_score(score: int):
 	# Print what we're sending, for debugging purposes:
 	print(data)
 
-func _change_player_name():
+func _change_player_name(in_name):
 	print("Changing player name")
 	
 	# use this variable for setting the name of the player
-	var player_name = "newName"
+	var player_name = in_name
 	
 	var data = { "name": str(player_name) }
 	var url =  "https://api.lootlocker.io/game/player/name"

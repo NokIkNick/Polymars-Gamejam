@@ -1,4 +1,4 @@
-extends Area2D
+extends Control
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,8 +11,9 @@ func _process(delta):
 	pass
 
 
+func _on_start_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/levels/tutorial.tscn")
 
 
-func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body.name == "Player"):
-		body.die("touching water!")
+func _on_quit_button_pressed():
+	get_tree().quit()

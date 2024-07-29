@@ -1,5 +1,7 @@
-extends Area2D
+extends Panel
 
+@onready var leaderboard_fetcher = $"../LeaderboardFetcher"
+@onready var text_edit = $TextEdit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,8 +13,5 @@ func _process(delta):
 	pass
 
 
-
-
-func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body.name == "Player"):
-		body.die("touching water!")
+func _on_text_edit_text_changed():
+	leaderboard_fetcher._change_player_name(text_edit.text)

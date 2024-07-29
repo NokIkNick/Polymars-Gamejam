@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var speed = 300.0
 const ORIGINAL_SPEED = 300.0
-const MAX_SPEED = 1600.0
+const MAX_SPEED = 1000.0
 const JUMP_VELOCITY = -900.0
 var last_checkpoint = null
 var timer_started = false
@@ -15,6 +15,7 @@ var too_fast = false
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var ui = $"../UI"
 @onready var speed_timer = $SpeedTimer
+@onready var death_reason = $"../CanvasLayer/Deathreason"
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -22,7 +23,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func update_speedometer():
 	speed_label.text = "Heat: %s"% abs(velocity.x)
-	if(speed >= 1200 && speed < MAX_SPEED -50):
+	if(speed >= MAX_SPEED-200 && speed < MAX_SPEED -50):
 		speed_label.set_modulate(Color(255,255,0))
 	elif(speed >= MAX_SPEED-50):
 		speed_label.set_modulate(Color(255,0,0))
@@ -82,19 +83,19 @@ func handle_movement():
 	if direction:
 		velocity.x = direction * speed
 		if(speed < MAX_SPEED):
-			speed +=1
+			speed +=2
 		
 		if(speed < 300):
 			speed = 300
 	else:
-		velocity.x = move_toward(velocity.x, 0, 45)
+		velocity.x = move_toward(velocity.x, 0, 60)
 		speed -= 10
 
 func add_speed(amount) -> void:
 	if((speed + amount) > MAX_SPEED):
 		pass
 	
-	if(speed < MAX_SPEED):
+	if(speed < MAX_SPEED && speed + amount < MAX_SPEED):
 		speed += amount
 
 func _ready():
@@ -106,6 +107,10 @@ func reset():
 		velocity.x = 0
 		velocity.y = 0
 
+func die(reason):
+	death_reason.text = "You died from: "+reason
+	reset()
+
 func set_checkpoint(checkpoint) -> void:
 	last_checkpoint = checkpoint
 
@@ -115,7 +120,7 @@ func handle_speed_timer():
 			timer_started = false
 			too_fast = false
 			print("Timer has stopped!")
-			reset()
+			die("overheated!")
 			
 	
 		if(speed >= MAX_SPEED -50):

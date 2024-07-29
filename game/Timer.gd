@@ -2,6 +2,7 @@ extends Label
 
 var time_elapsed := 0.0
 var is_stopped := false
+var score
 @onready var timer_label = $"."
 
 
@@ -9,6 +10,7 @@ func _process(delta: float) -> void:
 	if(!is_stopped):
 		time_elapsed += delta
 		timer_label.text = format_time(time_elapsed)
+		score = format_time(time_elapsed)
 
 
 func reset() -> void:
@@ -18,6 +20,7 @@ func reset() -> void:
 
 func stop() -> void:
 	is_stopped = true
+	
 
 func format_time(in_seconds: float) -> String:
 	# Calculate minutes, seconds, and milliseconds
