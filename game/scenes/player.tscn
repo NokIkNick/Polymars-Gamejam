@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://dp1sgbeywsxsi"]
+[gd_scene load_steps=71 format=3 uid="uid://dp1sgbeywsxsi"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_5aj2y"]
 [ext_resource type="Texture2D" uid="uid://cfbw1dyb0dtap" path="res://sprites/player_idle.png" id="1_23tjx"]
@@ -451,6 +451,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxxnp"]
 size = Vector2(24, 28)
 
+[sub_resource type="GDScript" id="GDScript_rg7lv"]
+script/source = "extends Timer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_5aj2y")
 
@@ -466,6 +480,8 @@ wait_time = 0.15
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -20)
+zoom = Vector2(1.25, 1.25)
 position_smoothing_speed = 10.0
 script = ExtResource("9_oveqc")
 
@@ -476,3 +492,8 @@ shape = SubResource("RectangleShape2D_yxxnp")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_yp1ox")
 volume_db = -10.306
+
+[node name="SpeedTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+script = SubResource("GDScript_rg7lv")
