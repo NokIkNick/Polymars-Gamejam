@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://fne1q0evaua4"]
+
+[ext_resource type="Script" path="res://Timer.gd" id="1_5akns"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qj30n"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="SpeedLabel" type="Label" parent="."]
+texture_filter = 1
+offset_right = 48.0
+offset_bottom = 23.0
+scale = Vector2(3, 3)
+text = "Speed"
+label_settings = SubResource("LabelSettings_qj30n")
+
+[node name="Timer" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -193.0
+offset_right = -129.0
+offset_bottom = 23.0
+grow_horizontal = 0
+scale = Vector2(3, 3)
+text = "00:00:00"
+script = ExtResource("1_5akns")
+metadata/_edit_use_anchors_ = true

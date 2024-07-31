@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://dsgm5fqm1vo6a"]
+
+[ext_resource type="FontFile" uid="uid://ci8kelx4psd6p" path="res://fonts/PixelifySans-VariableFont_wght.ttf" id="1_bg2vc"]
+[ext_resource type="Script" path="res://scenes/leaderboardScreen.gd" id="1_c1iw4"]
+[ext_resource type="PackedScene" uid="uid://caxtf6nobfeif" path="res://BoardEntry.tscn" id="2_a81be"]
+[ext_resource type="Script" path="res://Leaderboard-fetcher.gd" id="4_xc7ai"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_81rof"]
+font = ExtResource("1_bg2vc")
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4deu"]
+font = ExtResource("1_bg2vc")
+font_size = 32
+
+[node name="LeaderboardScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c1iw4")
+board_entry_scene = ExtResource("2_a81be")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -138.0
+offset_top = 71.0
+offset_right = 139.0
+offset_bottom = 131.0
+grow_horizontal = 2
+text = "Highscores:"
+label_settings = SubResource("LabelSettings_81rof")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -418.0
+offset_top = -183.0
+offset_right = 513.0
+offset_bottom = 426.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.88, 0.84)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.454
+offset_top = -202.119
+offset_right = 322.546
+offset_bottom = 339.881
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Label" type="Label" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+label_settings = SubResource("LabelSettings_g4deu")
+
+[node name="HBoxContainer" parent="." instance=ExtResource("2_a81be")]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 180.0
+offset_right = 842.0
+offset_bottom = 240.0
+
+[node name="LeaderboardFetcher" type="Node" parent="."]
+script = ExtResource("4_xc7ai")
