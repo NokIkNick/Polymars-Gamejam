@@ -190,7 +190,11 @@ func _on_player_get_name_request_completed(result, response_code, headers, body)
 	# Print data
 	print(json.get_data())
 	# Print player name
-	print(json.get_data().name)
+	if(json.get_data().name):
+		print(json.get_data().name)
+	else:
+		print("unnamed")
+
 
 func _on_upload_score_request_completed(result, response_code, headers, body) :
 	var json = JSON.new()
