@@ -2,9 +2,9 @@ extends Node
 
 # Use this game API key if you want to test it with a functioning leaderboard
 # "987dbd0b9e5eb3749072acc47a210996eea9feb0"
-var game_API_key = "dev_546f5a836aa244f6bafbf6e128ee34f2"
+var game_API_key = ""
 var development_mode = true
-var leaderboard_key = "overspeed_leaderboard"
+var leaderboard_key = ""
 var session_token = ""
 var score = 0
 @onready var label = $"../Panel/ScrollContainer/Label"

@@ -20,6 +20,7 @@ shape = SubResource("RectangleShape2D_4dyd6")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8jriv")
+volume_db = -10.306
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

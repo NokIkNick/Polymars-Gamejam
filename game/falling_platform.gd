@@ -20,15 +20,3 @@ func _physics_process(delta):
 		fall_speed += grav * delta  # Increase falling speed to simulate gravity effect
 
 
-func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	if(body.name == "Player"):
-		print("hi")
-		start_falling()
-
-
-
-
-func _on_body_entered(body):
-	if(body.name == "Player"):
-		print("hi")
-		start_falling()

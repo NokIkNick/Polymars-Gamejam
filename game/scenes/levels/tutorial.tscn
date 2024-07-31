@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bym1gyxiluiws"]
+[gd_scene load_steps=24 format=3 uid="uid://bym1gyxiluiws"]
 
 [ext_resource type="Script" path="res://scenes/levels/tutorial.gd" id="1_a7fgw"]
 [ext_resource type="Texture2D" uid="uid://d1fcdr1hk4m3m" path="res://sprites/background.png" id="1_fx26m"]
@@ -11,8 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://ccni6pd2ibdho" path="res://death_zone.tscn" id="8_s1bf3"]
 [ext_resource type="PackedScene" uid="uid://c71i43tx4e2s5" path="res://checkpoint.tscn" id="9_k4xtp"]
 [ext_resource type="PackedScene" uid="uid://bwr0h46svshm3" path="res://water_dripper.tscn" id="11_lehv5"]
-[ext_resource type="PackedScene" uid="uid://j3qcpaeda5fv" path="res://win.tscn" id="12_52yo6"]
-[ext_resource type="Script" path="res://Leaderboard-fetcher.gd" id="13_06omp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0ukq"]
 resource_name = "32"
@@ -196,239 +194,264 @@ label_settings = SubResource("LabelSettings_sneok")
 [node name="StartPosition" parent="." instance=ExtResource("7_hc83o")]
 position = Vector2(237.586, -143.914)
 
-[node name="Label" type="Label" parent="."]
-offset_left = 152.0
-offset_top = -356.0
-offset_right = 403.0
-offset_bottom = -316.0
+[node name="Labels" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Labels"]
+offset_left = 152.904
+offset_top = -353.74
+offset_right = 421.904
+offset_bottom = -313.74
 rotation = -0.148849
 text = "Move with [WSDA]"
 label_settings = SubResource("LabelSettings_j0ewi")
 
-[node name="Label12" type="Label" parent="."]
-offset_left = 633.232
-offset_top = -382.428
-offset_right = 916.232
-offset_bottom = -342.428
+[node name="Label12" type="Label" parent="Labels"]
+offset_left = 637.0
+offset_top = -380.0
+offset_right = 920.0
+offset_bottom = -340.0
 text = "Quick reset on [R]"
 label_settings = SubResource("LabelSettings_mrw52")
 
-[node name="Label3" type="Label" parent="."]
-offset_left = 1140.39
-offset_top = -390.0
-offset_right = 1435.39
-offset_bottom = -350.0
+[node name="Label3" type="Label" parent="Labels"]
+offset_left = 1147.18
+offset_top = -387.524
+offset_right = 1442.18
+offset_bottom = -347.524
 rotation = 0.13514
 text = "Use space to jump!"
 label_settings = SubResource("LabelSettings_j0ewi")
 
-[node name="Label5" type="Label" parent="."]
-offset_left = 1542.0
-offset_top = -373.0
-offset_right = 1837.0
-offset_bottom = -333.0
+[node name="Label5" type="Label" parent="Labels"]
+offset_left = 1551.17
+offset_top = -370.632
+offset_right = 1846.17
+offset_bottom = -330.632
 text = "You're a Flame."
 label_settings = SubResource("LabelSettings_j0ewi")
 
-[node name="Label9" type="Label" parent="."]
-offset_left = 2221.0
-offset_top = -364.0
-offset_right = 2516.0
-offset_bottom = -324.0
+[node name="Label9" type="Label" parent="Labels"]
+offset_left = 2234.21
+offset_top = -361.689
+offset_right = 2671.21
+offset_bottom = -321.689
 text = "As you run you build up heat."
 label_settings = SubResource("LabelSettings_j0ewi")
 
-[node name="Label13" type="Label" parent="."]
-offset_left = 3604.55
-offset_top = -366.326
-offset_right = 4280.55
-offset_bottom = -326.326
+[node name="Label13" type="Label" parent="Labels"]
+offset_left = 3626.0
+offset_top = -364.0
+offset_right = 4302.0
+offset_bottom = -324.0
 text = "Some gaps can only be bridged by heating up"
 label_settings = SubResource("LabelSettings_j0ewi")
 
-[node name="Label10" type="Label" parent="."]
-offset_left = 2129.0
-offset_top = -324.0
-offset_right = 2723.0
-offset_bottom = -284.0
+[node name="Label10" type="Label" parent="Labels"]
+offset_left = 2141.67
+offset_top = -321.943
+offset_right = 2735.67
+offset_bottom = -281.943
 text = "A Flame speeds up the hotter it gets (fast)"
 label_settings = SubResource("LabelSettings_5ggkv")
 
-[node name="Label11" type="Label" parent="."]
-offset_left = 1895.0
-offset_top = -287.0
-offset_right = 3027.0
-offset_bottom = -247.0
+[node name="Label11" type="Label" parent="Labels"]
+offset_left = 1906.28
+offset_top = -285.178
+offset_right = 3038.28
+offset_bottom = -245.178
 text = "But a little flame like you, can't contain that much heat. So be careful not to over do it."
 label_settings = SubResource("LabelSettings_0ch6n")
 
-[node name="Label14" type="Label" parent="."]
-offset_left = 4152.29
-offset_top = -214.361
-offset_right = 4634.29
-offset_bottom = -174.361
+[node name="Label14" type="Label" parent="Labels"]
+offset_left = 4177.0
+offset_top = -213.0
+offset_right = 4659.0
+offset_bottom = -173.0
 text = "Fireplaces are checkpoints (cozy)"
 label_settings = SubResource("LabelSettings_0ch6n")
 
-[node name="Label15" type="Label" parent="."]
-offset_left = 5091.7
-offset_top = -250.591
-offset_right = 5573.7
-offset_bottom = -210.591
+[node name="Label15" type="Label" parent="Labels"]
+offset_left = 5122.0
+offset_top = -249.0
+offset_right = 5604.0
+offset_bottom = -209.0
 text = "Steam eruptors(tm) launch you "
 label_settings = SubResource("LabelSettings_0ch6n")
 
-[node name="Label17" type="Label" parent="."]
-offset_left = 5610.62
-offset_top = -479.041
-offset_right = 6092.62
-offset_bottom = -439.041
+[node name="Label17" type="Label" parent="Labels"]
+offset_left = 5644.0
+offset_top = -476.0
+offset_right = 6126.0
+offset_bottom = -436.0
 text = "Dripping water slows you down"
 label_settings = SubResource("LabelSettings_0ch6n")
 
-[node name="Label16" type="Label" parent="."]
-offset_left = 5152.34
-offset_top = -215.367
-offset_right = 5634.34
-offset_bottom = -175.367
+[node name="Label16" type="Label" parent="Labels"]
+offset_left = 5183.0
+offset_top = -214.0
+offset_right = 5665.0
+offset_bottom = -174.0
 text = "But also heats you up."
 label_settings = SubResource("LabelSettings_7nhoq")
 
-[node name="Label6" type="Label" parent="."]
-offset_left = 1501.0
-offset_top = -342.0
-offset_right = 1815.0
-offset_bottom = -302.0
+[node name="Label6" type="Label" parent="Labels"]
+offset_left = 1509.93
+offset_top = -339.829
+offset_right = 1823.93
+offset_bottom = -299.829
 text = "Water is dangerous!"
 label_settings = SubResource("LabelSettings_j0ewi")
 
-[node name="Label7" type="Label" parent="."]
-offset_left = 1558.0
-offset_top = -174.0
-offset_right = 1872.0
-offset_bottom = -134.0
+[node name="Label7" type="Label" parent="Labels"]
+offset_left = 1567.27
+offset_top = -172.895
+offset_right = 1881.27
+offset_bottom = -132.895
 text = "This is water (ow)"
 label_settings = SubResource("LabelSettings_r07nv")
 
-[node name="Label8" type="Label" parent="."]
-offset_left = 1624.0
-offset_top = -151.0
-offset_right = 1938.0
-offset_bottom = -92.0
+[node name="Label8" type="Label" parent="Labels"]
+offset_left = 1633.66
+offset_top = -150.041
+offset_right = 1947.66
+offset_bottom = -91.0413
 text = "VVV"
 label_settings = SubResource("LabelSettings_r07nv")
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 162.0
-offset_top = -322.0
-offset_right = 431.0
-offset_bottom = -282.0
+[node name="Label2" type="Label" parent="Labels"]
+offset_left = 162.964
+offset_top = -319.956
+offset_right = 431.964
+offset_bottom = -279.956
 rotation = -0.148849
 text = "Or the arrow keys!"
 label_settings = SubResource("LabelSettings_0hsos")
 
-[node name="Label4" type="Label" parent="."]
-offset_left = 1146.39
-offset_top = -350.0
-offset_right = 1419.39
-offset_bottom = -310.0
+[node name="Label4" type="Label" parent="Labels"]
+offset_left = 1153.21
+offset_top = -347.778
+offset_right = 1426.21
+offset_bottom = -307.778
 rotation = 0.141886
 text = "The up arrow works too!"
 label_settings = SubResource("LabelSettings_0hsos")
 
-[node name="DeathZone" parent="." instance=ExtResource("8_s1bf3")]
-position = Vector2(1645.21, 10.0639)
-scale = Vector2(-13.6465, 5.76391)
+[node name="DeathZones" type="Node" parent="."]
 
-[node name="DeathZone2" parent="." instance=ExtResource("8_s1bf3")]
-position = Vector2(3916.7, 15.0958)
-scale = Vector2(-21.957, 5.76391)
+[node name="DeathZone" parent="DeathZones" instance=ExtResource("8_s1bf3")]
+position = Vector2(1655, 10)
+rotation = -3.14159
+scale = Vector2(13.7277, -5.72731)
 
-[node name="DeathZone4" parent="." instance=ExtResource("8_s1bf3")]
-position = Vector2(3124.41, -1042.62)
-scale = Vector2(-32.2955, 5.76391)
+[node name="DeathZone2" parent="DeathZones" instance=ExtResource("8_s1bf3")]
+position = Vector2(3940, 15)
+rotation = -3.14159
+scale = Vector2(22.0876, -5.72731)
 
-[node name="DeathZone3" parent="." instance=ExtResource("8_s1bf3")]
-position = Vector2(8234.01, -204.297)
-scale = Vector2(-254.667, 5.764)
+[node name="DeathZone4" parent="DeathZones" instance=ExtResource("8_s1bf3")]
+position = Vector2(3143, -1036)
+rotation = -3.14159
+scale = Vector2(32.4877, -5.72731)
 
-[node name="Checkpoint" parent="." instance=ExtResource("9_k4xtp")]
-position = Vector2(4386.9, -126.805)
+[node name="DeathZone3" parent="DeathZones" instance=ExtResource("8_s1bf3")]
+position = Vector2(8283, -203)
+rotation = -3.14159
+scale = Vector2(256.182, -5.7274)
 
-[node name="Checkpoint2" parent="." instance=ExtResource("9_k4xtp")]
-position = Vector2(6757.79, -351.23)
+[node name="Checkpoints" type="Node" parent="."]
 
-[node name="Checkpoint3" parent="." instance=ExtResource("9_k4xtp")]
-position = Vector2(7764.8, -1182.51)
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("9_k4xtp")]
+position = Vector2(4413, -126)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="Checkpoint4" parent="." instance=ExtResource("9_k4xtp")]
-position = Vector2(2676.08, -1181.5)
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("9_k4xtp")]
+position = Vector2(6798, -349)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(5301.46, -111.709)
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("9_k4xtp")]
+position = Vector2(7811, -1175)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor2" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(8560.07, -528.354)
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("9_k4xtp")]
+position = Vector2(2692, -1174)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor3" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(8176.35, -848.386)
+[node name="SteamEruptors" type="Node" parent="."]
 
-[node name="SteamEruptor5" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(7011.28, -1168.42)
+[node name="SteamEruptor" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(5333, -111)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor6" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(6088.77, -1168.42)
+[node name="SteamEruptor2" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(8611, -523.999)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor7" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(5192.11, -1168.42)
+[node name="SteamEruptor3" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(8225, -842)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor10" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(4281.53, -1172.44)
+[node name="SteamEruptor5" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(7053, -1160)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="SteamEruptor4" parent="." instance=ExtResource("8_pgkwp")]
-position = Vector2(9359.31, -816.182)
+[node name="SteamEruptor6" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(6125, -1160)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="WaterDripper" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(6167.3, -631.006)
-scale = Vector2(7.61847, 16.3987)
+[node name="SteamEruptor7" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(5223, -1160)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="WaterDripper2" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(6723.99, -1359.63)
-scale = Vector2(7.61847, 16.3987)
+[node name="SteamEruptor10" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(4314, -1160)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="WaterDripper3" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(6396.94, -1361.64)
-scale = Vector2(7.61847, 16.3987)
+[node name="SteamEruptor4" parent="SteamEruptors" instance=ExtResource("8_pgkwp")]
+position = Vector2(9415, -810)
+scale = Vector2(4.0238, 3.9746)
 
-[node name="WaterDripper4" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(5857.15, -1622.3)
-scale = Vector2(7.61847, 16.3987)
+[node name="WaterDrippers" type="Node" parent="."]
+editor_description = "
+"
 
-[node name="WaterDripper5" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(5486.36, -1622.3)
-scale = Vector2(7.61847, 16.3987)
+[node name="WaterDripper" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(6204, -627)
+scale = Vector2(7.6638, 16.2946)
 
-[node name="WaterDripper6" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(4913.76, -1610.22)
-scale = Vector2(7.61847, 16.3987)
+[node name="WaterDripper2" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(6764, -1351)
+scale = Vector2(7.6638, 16.2946)
 
-[node name="WaterDripper7" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(4567.82, -1600.16)
-scale = Vector2(7.61847, 16.3987)
+[node name="WaterDripper3" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(6435, -1352.99)
+scale = Vector2(7.6638, 16.2946)
 
-[node name="WaterDripper8" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(4044.93, -1362.65)
-scale = Vector2(7.61847, 16.3987)
+[node name="WaterDripper4" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(5892, -1612)
+scale = Vector2(7.6638, 16.2946)
 
-[node name="WaterDripper9" parent="." instance=ExtResource("11_lehv5")]
-position = Vector2(3617.48, -1368.69)
-scale = Vector2(7.61847, 16.3987)
+[node name="WaterDripper5" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(5519, -1612)
+scale = Vector2(7.6638, 16.2946)
+
+[node name="WaterDripper6" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(4943, -1600)
+scale = Vector2(7.6638, 16.2946)
+
+[node name="WaterDripper7" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(4595, -1590)
+scale = Vector2(7.6638, 16.2946)
+
+[node name="WaterDripper8" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(4069, -1354)
+scale = Vector2(7.6638, 16.2946)
+
+[node name="WaterDripper9" parent="WaterDrippers" instance=ExtResource("11_lehv5")]
+position = Vector2(3639, -1360)
+scale = Vector2(7.6638, 16.2946)
 
 [node name="Player" parent="." instance=ExtResource("3_c7kt2")]
+top_level = true
+light_mask = 3
+visibility_layer = 3
 position = Vector2(-35.9997, -341)
-
-[node name="Win" parent="." instance=ExtResource("12_52yo6")]
-position = Vector2(619.315, -136.869)
-
-[node name="LeaderboardFetcher" type="Node" parent="."]
-script = ExtResource("13_06omp")

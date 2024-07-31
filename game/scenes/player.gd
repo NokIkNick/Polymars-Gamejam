@@ -13,9 +13,9 @@ var too_fast = false
 @onready var coyote_timer = $CoyoteTimer
 @onready var character_body_2d = $"."
 @onready var audio_stream_player = $AudioStreamPlayer
-@onready var ui = $"../UI"
 @onready var speed_timer = $SpeedTimer
 @onready var death_reason = $"../CanvasLayer/Deathreason"
+@onready var death_sound = $DeathSound
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -102,6 +102,7 @@ func _ready():
 	last_checkpoint = null
 
 func reset():
+	death_sound.play()
 	if(last_checkpoint != null):
 		position = last_checkpoint.position
 		velocity.x = 0
@@ -119,18 +120,15 @@ func handle_speed_timer():
 		if(speed_timer.is_stopped() && too_fast && timer_started):
 			timer_started = false
 			too_fast = false
-			print("Timer has stopped!")
 			die("overheated!")
 			
 	
 		if(speed >= MAX_SPEED -50):
 			if(speed_timer.is_stopped() && !too_fast && !timer_started):
-				print("too fast! Starting timer!")
 				timer_started = true
 				too_fast = true
 				speed_timer.start()
-		else: if(speed < MAX_SPEED -50):
-			print("Not going too fast any longer")
+		elif(speed < MAX_SPEED -50):
 			timer_started = false
 			too_fast = false
 			speed_timer.stop()
