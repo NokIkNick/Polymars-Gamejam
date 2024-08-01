@@ -27,10 +27,12 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
 text = "Quit"
 

@@ -8,8 +8,7 @@ extends Node
 const speed := 1400.0;
 
 
-func _process(delta):
-	pass
+
 
 
 func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
